@@ -1,12 +1,23 @@
 
 import { Button } from "@/components/ui/button";
-import { Link, useLocation } from "react-router-dom";
-import { Film, Star, Play } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Film } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Navigation = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const isActive = (path: string) => location.pathname === path;
+
+  const handleGetStarted = () => {
+    toast({
+      title: "Welcome to CineAI!",
+      description: "Let's find your perfect movie recommendations...",
+    });
+    navigate("/recommendations");
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
@@ -66,6 +77,7 @@ const Navigation = () => {
             </Link>
             <Button 
               size="sm"
+              onClick={handleGetStarted}
               className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 transition-all duration-200 hover:scale-105"
             >
               Get Started

@@ -5,17 +5,57 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Film, Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login attempt:", { email, password });
-    // TODO: Implement actual login logic
+    setIsLoading(true);
+    
+    // Simulate login process
+    setTimeout(() => {
+      console.log("Login attempt:", { email, password });
+      
+      toast({
+        title: "Welcome back!",
+        description: "You have successfully signed in to CineAI.",
+      });
+      
+      // Redirect to home page
+      navigate("/");
+      setIsLoading(false);
+    }, 1500);
+  };
+
+  const handleSocialLogin = (provider: string) => {
+    toast({
+      title: `${provider} Login`,
+      description: `Redirecting to ${provider} for authentication...`,
+    });
+    
+    // Simulate social login
+    setTimeout(() => {
+      toast({
+        title: "Social Login Success!",
+        description: `Successfully signed in with ${provider}.`,
+      });
+      navigate("/");
+    }, 2000);
+  };
+
+  const handleForgotPassword = () => {
+    toast({
+      title: "Password Reset",
+      description: "Password reset instructions will be sent to your email.",
+    });
   };
 
   return (
@@ -83,17 +123,22 @@ const Login = () => {
                   <input type="checkbox" className="rounded border-white/20 bg-white/10" />
                   <span>Remember me</span>
                 </label>
-                <Link to="/forgot-password" className="text-purple-400 hover:text-purple-300 transition-colors">
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
+                  className="text-purple-400 hover:text-purple-300 transition-colors"
+                >
                   Forgot password?
-                </Link>
+                </button>
               </div>
 
               <Button
                 type="submit"
+                disabled={isLoading}
                 className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
                 size="lg"
               >
-                Sign In
+                {isLoading ? "Signing In..." : "Sign In"}
               </Button>
             </form>
 
@@ -118,13 +163,17 @@ const Login = () => {
 
               <div className="mt-4 grid grid-cols-2 gap-3">
                 <Button
+                  type="button"
                   variant="outline"
+                  onClick={() => handleSocialLogin("Google")}
                   className="bg-white/10 border-white/20 text-white hover:bg-white/20 transition-all duration-200"
                 >
                   Google
                 </Button>
                 <Button
+                  type="button"
                   variant="outline"
+                  onClick={() => handleSocialLogin("Facebook")}
                   className="bg-white/10 border-white/20 text-white hover:bg-white/20 transition-all duration-200"
                 >
                   Facebook

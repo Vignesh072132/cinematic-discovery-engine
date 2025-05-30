@@ -1,8 +1,29 @@
 
 import { Button } from "@/components/ui/button";
 import { Play, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const Hero = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleGetRecommendations = () => {
+    toast({
+      title: "Getting Recommendations",
+      description: "Analyzing your preferences to find perfect movie matches...",
+    });
+    navigate("/recommendations");
+  };
+
+  const handleBrowseMovies = () => {
+    toast({
+      title: "Browse Movies",
+      description: "Exploring our vast collection of movies for you...",
+    });
+    navigate("/movies");
+  };
+
   return (
     <section className="pt-20 pb-16 px-6 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent z-10" />
@@ -30,6 +51,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-in">
             <Button 
               size="lg" 
+              onClick={handleGetRecommendations}
               className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
             >
               <Play className="mr-2 h-5 w-5" />
@@ -39,6 +61,7 @@ const Hero = () => {
             <Button 
               size="lg" 
               variant="outline" 
+              onClick={handleBrowseMovies}
               className="border-white/30 text-white hover:bg-white/10 transition-all duration-300 hover:scale-105"
             >
               <Star className="mr-2 h-5 w-5" />
