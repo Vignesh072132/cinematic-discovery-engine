@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { star, play } from "lucide-react";
+import { Star, Play } from "lucide-react";
 
 const TrendingMovies = () => {
   const trendingMovies = [
@@ -48,7 +48,7 @@ const TrendingMovies = () => {
               
               <div className="flex items-center justify-between">
                 <div className="flex items-center text-yellow-400">
-                  <star className="h-4 w-4 fill-current" />
+                  <Star className="h-4 w-4 fill-current" />
                   <span className="ml-1 text-sm font-medium">{movie.rating}</span>
                 </div>
                 <Button 
@@ -56,7 +56,7 @@ const TrendingMovies = () => {
                   variant="ghost" 
                   className="opacity-0 group-hover:opacity-100 transition-all duration-200 hover:bg-purple-600 hover:text-white"
                 >
-                  <play className="h-4 w-4" />
+                  <Play className="h-4 w-4" />
                 </Button>
               </div>
             </div>

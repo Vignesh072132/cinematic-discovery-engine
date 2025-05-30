@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { star, play } from "lucide-react";
+import { Star, Play } from "lucide-react";
 import { useState } from "react";
 
 interface MovieCardProps {
@@ -12,16 +12,18 @@ interface MovieCardProps {
   image: string;
   description: string;
   duration?: string;
+  onClick?: () => void;
 }
 
-const MovieCard = ({ title, year, genre, rating, image, description, duration }: MovieCardProps) => {
+const MovieCard = ({ title, year, genre, rating, image, description, duration, onClick }: MovieCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div 
-      className="group relative overflow-hidden rounded-xl bg-gradient-to-b from-gray-900/50 to-black/50 backdrop-blur-sm border border-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
+      className="group relative overflow-hidden rounded-xl bg-gradient-to-b from-gray-900/50 to-black/50 backdrop-blur-sm border border-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
     >
       <div className="aspect-[3/4] overflow-hidden">
         <img 
@@ -42,14 +44,14 @@ const MovieCard = ({ title, year, genre, rating, image, description, duration }:
               size="sm" 
               className="rounded-full bg-purple-600 hover:bg-purple-700 transition-all duration-200"
             >
-              <play className="h-4 w-4" />
+              <Play className="h-4 w-4" />
             </Button>
           </div>
         )}
 
         <div className="flex items-center gap-2 mb-2">
           <div className="flex items-center text-yellow-400">
-            <star className="h-4 w-4 fill-current" />
+            <Star className="h-4 w-4 fill-current" />
             <span className="ml-1 text-sm font-medium">{rating}</span>
           </div>
           {duration && (

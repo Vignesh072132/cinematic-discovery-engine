@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { play, star } from "lucide-react";
+import { Play, Star } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -32,7 +32,7 @@ const Hero = () => {
               size="lg" 
               className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
             >
-              <play className="mr-2 h-5 w-5" />
+              <Play className="mr-2 h-5 w-5" />
               Get Recommendations
             </Button>
             
@@ -41,7 +41,7 @@ const Hero = () => {
               variant="outline" 
               className="border-white/30 text-white hover:bg-white/10 transition-all duration-300 hover:scale-105"
             >
-              <star className="mr-2 h-5 w-5" />
+              <Star className="mr-2 h-5 w-5" />
               Browse Movies
             </Button>
           </div>
