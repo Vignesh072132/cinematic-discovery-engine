@@ -5,9 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const Recommendations = () => {
   const [selectedMovie, setSelectedMovie] = useState<any>(null);
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const recommendedMovies = [
     {
@@ -72,6 +76,30 @@ const Recommendations = () => {
     setSelectedMovie(null);
   };
 
+  const handleAddToWatchlist = (movie: any) => {
+    toast({
+      title: "Added to Watchlist!",
+      description: `${movie.title} has been added to your watchlist.`,
+    });
+    closeModal();
+    navigate("/watchlist");
+  };
+
+  const handleWatchTrailer = (movie: any) => {
+    toast({
+      title: "Loading Trailer",
+      description: `Opening trailer for ${movie.title}...`,
+    });
+    navigate("/movies");
+  };
+
+  const handleLoadMore = () => {
+    toast({
+      title: "Loading More",
+      description: "Fetching more personalized recommendations...",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900">
       <Navigation />
@@ -109,6 +137,7 @@ const Recommendations = () => {
           <div className="text-center animate-fade-in">
             <Button 
               size="lg"
+              onClick={handleLoadMore}
               className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 transition-all duration-300 hover:scale-105"
             >
               Load More Recommendations
@@ -187,6 +216,7 @@ const Recommendations = () => {
               <div className="flex gap-4">
                 <Button 
                   size="lg"
+                  onClick={() => handleAddToWatchlist(selectedMovie)}
                   className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 transition-all duration-300 hover:scale-105"
                 >
                   Add to Watchlist
@@ -194,6 +224,7 @@ const Recommendations = () => {
                 <Button 
                   size="lg"
                   variant="outline"
+                  onClick={() => handleWatchTrailer(selectedMovie)}
                   className="border-white/30 text-white hover:bg-white/10 transition-all duration-300 hover:scale-105"
                 >
                   Watch Trailer

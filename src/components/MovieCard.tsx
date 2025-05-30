@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Star, Play } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 interface MovieCardProps {
   title: string;
@@ -17,13 +19,34 @@ interface MovieCardProps {
 
 const MovieCard = ({ title, year, genre, rating, image, description, duration, onClick }: MovieCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handlePlayClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    toast({
+      title: `Playing ${title}`,
+      description: "Redirecting to movie player...",
+    });
+    navigate("/movies");
+  };
+
+  const handleCardClick = () => {
+    toast({
+      title: `Opening ${title}`,
+      description: "Loading movie details...",
+    });
+    if (onClick) {
+      onClick();
+    }
+  };
 
   return (
     <div 
       className="group relative overflow-hidden rounded-xl bg-gradient-to-b from-gray-900/50 to-black/50 backdrop-blur-sm border border-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={onClick}
+      onClick={handleCardClick}
     >
       <div className="aspect-[3/4] overflow-hidden">
         <img 
@@ -42,6 +65,7 @@ const MovieCard = ({ title, year, genre, rating, image, description, duration, o
           <div className="absolute top-4 right-4 animate-fade-in">
             <Button 
               size="sm" 
+              onClick={handlePlayClick}
               className="rounded-full bg-purple-600 hover:bg-purple-700 transition-all duration-200"
             >
               <Play className="h-4 w-4" />
