@@ -55,13 +55,15 @@ const Navigation = () => {
           </div>
 
           <div className="flex items-center space-x-4">
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white transition-all duration-200"
-            >
-              Sign In
-            </Button>
+            <Link to="/login">
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white transition-all duration-200"
+              >
+                Sign In
+              </Button>
+            </Link>
             <Button 
               size="sm"
               className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 transition-all duration-200 hover:scale-105"

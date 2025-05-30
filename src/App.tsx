@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Recommendations from "./pages/Recommendations";
 import Watchlist from "./pages/Watchlist";
 import Movies from "./pages/Movies";
+import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/recommendations" element={<Recommendations />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/watchlist" element={<Watchlist />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
